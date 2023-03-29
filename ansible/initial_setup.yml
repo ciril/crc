@@ -1,0 +1,26 @@
+---
+- name: Initial server configuration
+  hosts: localhost
+  tasks:
+    - name: Add user
+      ansible.builtin.user:
+        name: michal
+        shell: /bin/bash
+        groups: wheel
+        append: yes
+    - name: Add authorized_keys
+      ansible.posix.authorized_key:
+        user: michal
+        key: "{{ lookup('file', 'id_rsa.pub') }}"
+    - name: Disallow root login
+      ansible.builtin.lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+        state: absent
+        backup: yes
+      notify: Restart sshd
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
