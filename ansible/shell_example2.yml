@@ -1,10 +1,10 @@
 ---
-  - name: "First example"
+  - name: "Second example"
     hosts: all 
     tasks:
 
-    - name: "just execute a ls -lrt command"
-      shell: "ls -la ~ "
+    - name: "create a new file"
+      shell: "touch ~/test.txt"
       register: "output"
 
     - debug: var=output.stdout_lines
