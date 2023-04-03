@@ -5,6 +5,6 @@ while [ $filecount -lt 10000 ] ; do
     filesize=$RANDOM
     filesize=$(($filesize+1024))
     base64 /dev/urandom | 
-    head -c "$filesize" > /logfiles/file${filecount}.$(date)
+    head -c "$filesize" > /logfiles/file${filecount}."$(date)"
     ((filecount++))
 done
