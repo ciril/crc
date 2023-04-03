@@ -1,5 +1,5 @@
 ---
-  - name: "Second example"
+  - name: "Third example"
     hosts: all 
     vars_files: ./vars/variables.yml
     tasks:
