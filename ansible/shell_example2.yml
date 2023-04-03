@@ -3,14 +3,15 @@
     hosts: all 
     tasks:
 
-    - name: "create a new file"
+
+    - name: "delete a file"
+      shell: "rm ~/test.txt"
+      register: "output"
+
+    - debug: var=output.stdout_lines
+
+    - name: "read file"
       shell: "cat ~/test.txt"
       register: "output"
       
-    - debug: var=output.stdout_lines
-
-    - name: "create a new file"
-      shell: "touch ~/test.txt"
-      register: "output"
-
     - debug: var=output.stdout_lines
