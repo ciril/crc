@@ -3,12 +3,18 @@
     hosts: all 
     tasks:
 
-
     - name: "delete a file"
       shell: "rm ~/test.txt"
       register: "output"
 
     - debug: var=output.stdout_lines
+
+    - name: Check if a file exists and fail task if it does
+      ansible.builtin.command: ls ~/
+      register: result
+      failed_when:
+        - result.rc == 0
+       - '"No such" not in result.stdout'
 
     - name: "read file"
       shell: "cat ~/test.txt"
