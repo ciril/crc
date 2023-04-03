@@ -5,5 +5,5 @@
     tasks:
 
     - name: Reading file using command module
-      ansible.builtin.command: cat {{ path }}test.txt
+      ansible.builtin.command: cat {{ path }}test2.txt
       register: myoutput
