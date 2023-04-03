@@ -3,8 +3,6 @@
     hosts: all 
     tasks:
 
-    - name: "read file"
-      shell: "cat {{ path }}test.txt"
-      register: "output"
-      
-    - debug: var=output.stdout_lines
+    - name: Reading file using command module
+      ansible.builtin.command: cat {{ path }}test.txt
+      register: myoutput
