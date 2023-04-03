@@ -1,6 +1,7 @@
 ---
   - name: "Second example"
     hosts: all 
+    vars_files: ./vars/variables.yml
     tasks:
 
     - name: Reading file using command module
