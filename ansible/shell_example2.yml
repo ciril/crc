@@ -6,6 +6,8 @@
     - name: "create a new file"
       shell: "cat ~/test.txt"
       register: "output"
+      
+    - debug: var=output.stdout_lines
 
     - name: "create a new file"
       shell: "touch ~/test.txt"
