@@ -6,4 +6,4 @@
     - name: "just execute a ls -lrt command"
       shell: "ls -la ~ "
       register: "output"
-    - debug: var=output.stdout_lines
+    - debug: msg=output.stdout_lines
