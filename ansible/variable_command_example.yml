@@ -7,11 +7,11 @@
     - name: Reading file using command module
       ansible.builtin.command: "cat {{ path }}test2.txt"
       register: myoutput
-    - debug: var=output.stdout_lines
+    - debug: output.stdout_lines
 
     - name: Reading file using command module
       ansible.builtin.command: 
         chdir: "{{ path }}"
         cmd: cat test2.txt
       register: myoutput
-    - debug: var= "{{ myoutput.stdout }}"
+    - debug: "{{ myoutput.stdout }}"
