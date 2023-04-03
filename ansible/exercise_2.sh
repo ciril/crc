@@ -1,8 +1,8 @@
 #!/bin/bash
 mkdir /logfiles
 filecount=0
+now=$( date +%Y%m%d-%H%M-%S )
 while [ $filecount -lt 10000 ] ; do
-    now=$( date +%Y%m%d-%H%M-%S )
     filesize=$RANDOM
     filesize=$(($filesize+1024))
     base64 /dev/urandom | 
