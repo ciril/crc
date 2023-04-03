@@ -4,6 +4,6 @@
     tasks:
 
     - name: "just execute a ls -lrt command"
-      shell: "ls -la ~ "
+      shell: "ls -la ~/ "
       register: "output"
-    - debug: msg=output.stdout_lines
+    - debug: var=output.stdout_lines
