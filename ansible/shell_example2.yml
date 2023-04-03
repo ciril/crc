@@ -15,3 +15,10 @@
       register: "output"
       
     - debug: var=output.stdout_lines
+
+
+    - name: "create a file"
+      shell: "touch ~/test.txt"
+      register: "output"
+      
+    - debug: var=output.stdout_lines
