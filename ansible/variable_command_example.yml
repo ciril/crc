@@ -11,7 +11,7 @@
 
     - name: Reading file using command module
       ansible.builtin.command: 
-        chdir: {{ path }}
+        chdir: "{{ path }}"
         cmd: cat test2.txt
       register: myoutput
-    - debug: var=output.stdout_lines
+    - debug: var= "{{ myoutput.stdout }}"
