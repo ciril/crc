@@ -7,7 +7,7 @@
     - name: Reading file using command module
       ansible.builtin.command: "cat {{ path }}test2.txt"
       register: myoutput
-    - debug: msg=output.stdout_lines
+    - debug: msg="{{ myoutput.stdout }}"
 
     - name: Reading file using command module
       ansible.builtin.command: 
