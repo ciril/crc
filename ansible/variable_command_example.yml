@@ -1,0 +1,10 @@
+---
+  - name: "Second example"
+    hosts: all 
+    tasks:
+
+    - name: "read file"
+      shell: "cat {{ path }}test.txt"
+      register: "output"
+      
+    - debug: var=output.stdout_lines
