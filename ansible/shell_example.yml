@@ -1,10 +1,9 @@
 ---
   - name: "First example"
-    hosts: all 
+    hosts: 192.168.0.66
     tasks:
 
     - name: "just execute a ls -lrt command"
       shell: "ls -la ~ "
       register: "output"
-
     - debug: var=output.stdout_lines

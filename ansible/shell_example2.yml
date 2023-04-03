@@ -6,7 +6,16 @@
     - name: "delete a file"
       shell: "rm ~/test.txt"
       register: "output"
+    - debug: var=output.stdout_lines
 
+    - name: "read file"
+      shell: "cat ~/test.txt"
+      register: "output"  
+    - debug: var=output.stdout_lines
+
+    - name: "create a file"
+      shell: "touch ~/test.txt"
+      register: "output"
     - debug: var=output.stdout_lines
 
     - name: Check if a file exists and fail task if it does
@@ -15,16 +24,3 @@
       failed_when:
         - result.rc == 0
         - '"No such" not in result.stdout'
-
-    - name: "read file"
-      shell: "cat ~/test.txt"
-      register: "output"
-      
-    - debug: var=output.stdout_lines
-
-
-    - name: "create a file"
-      shell: "touch ~/test.txt"
-      register: "output"
-      
-    - debug: var=output.stdout_lines
