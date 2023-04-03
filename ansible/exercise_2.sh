@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir /logfiles
 filecount=0
-now='[\D{%d.%m.%y} \t]'
+now=$( date +%Y%m%d-%H%M-%S )
 while [ $filecount -lt 10000 ] ; do
     filesize=$RANDOM
     filesize=$(($filesize+1024))
