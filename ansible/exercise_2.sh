@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir /logifles
+mkdir /logfiles
 filecount=0
 while [ $filecount -lt 10000 ] ; do
     filesize=$RANDOM
