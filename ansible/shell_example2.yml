@@ -8,16 +8,6 @@
       register: "output"
     - debug: msg=output.stdout_lines
 
-    - name: "read file"
-      shell: "cat ~/test.txt"
-      register: "output"  
-    - debug: msg=output.stdout_lines
-
-    - name: "create a file"
-      shell: "touch ~/test.txt"
-      register: "output"
-    - debug: msg=output.stdout_lines
-
     - name: Check if a file exists and fail task if it does
       ansible.builtin.command: ls ~/
       register: result
