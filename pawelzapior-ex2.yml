@@ -1,0 +1,24 @@
+---
+  - name: "EX2"
+    hosts: localhost
+    tasks:
+    - name: Install logrotate
+      apt:
+        name: logrotate
+        state: present
+
+    - name: Create logrotate configuration file
+      connection: local
+      become: yes
+      copy:
+        dest: /etc/logrotate.d/exercise_2
+        content: |
+          /logfiles/* {
+              daily
+              compress
+              minsize 20k
+              create
+              postrotate
+                  find /logfiles -name '*.gz' -mtime -7 -print > /logfiles/log
+              endscript
+          }
