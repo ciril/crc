@@ -7,7 +7,7 @@
     log_dir: /logfiles
   
   tasks:
-  - name: Install logrotate
+    - name: Install logrotate
       apt:
         name: logrotate
         state: present
