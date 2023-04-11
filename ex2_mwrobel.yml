@@ -1,0 +1,36 @@
+---
+- name: Logrotate configuration
+  hosts: localhost
+  become: true
+
+  vars:
+    log_dir: /logfiles
+  
+  tasks:
+  - name: Install logrotate
+      apt:
+        name: logrotate
+        state: present
+
+    - name: Create logfile directory
+      file:
+        path: "{{ log_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Create a list file
+      file:
+        path: "{{ log_dir }}/rotate.log"
+        state: touch
+        mode: '0644'
+
+    - name: Configure logrotate service
+      copy:
+        src: ex2_mwrobel.conf
+        dest: /etc/logrotate.d/logfiles
+        mode: '0644'
+
+    - name: Restart logrotate service
+      service:
+        name: logrotate
+        state: restarted
