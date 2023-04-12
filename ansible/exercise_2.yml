@@ -1,0 +1,31 @@
+---
+  - name: "Logrotate automation"
+    hosts: localhost
+    gather_facts: no
+    tasks:
+
+    - name: "Logrotate config file creation"
+      file:
+        path: "/etc/logrotate.d/logfiles"
+        state: touch
+        mode: "0644"
+    
+    - name: "Create log file"
+      file:
+        path: "/logfiles/log"
+        state: touch
+
+    - name: "Logrotate configuration"
+      blockinfile:
+        path: "/etc/logrotate.d/logfiles"
+        block: |
+          /logfiles/file* {
+            daily
+            maxsize 20k
+            compress
+            nocreate
+            postrotate
+              echo $1 >> /logfiles/log
+            endscript
+          }
+
