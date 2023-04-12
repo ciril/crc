@@ -1,0 +1,23 @@
+- name: Logrotate exercise 
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Logrotate instalation
+      ansible.builtin.yum:
+        name: logrotate
+        state: present
+    - name: Create logrotate file
+      copy:
+        content: |
+          /logfiles/* {
+            daily
+            rotate 1
+            size 20k
+            compress
+            sharedscripts
+            lastaction
+              find /logfiles -iname "*.gz" -printf "%f\n" > /logfiles/logfile.log
+            endscript
+          }
+        dest: /etc/logrotate.d/exercise_2
+        
