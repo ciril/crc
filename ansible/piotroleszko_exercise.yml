@@ -1,6 +1,6 @@
 - name: Logrotate exercise 
   hosts: localhost
-  becone: true
+  become: true
   tasks:
     - name: Logrotate instalation
       ansible.builtin.yum:
@@ -11,12 +11,13 @@
         content: |
           /logfiles/* {
             daily
-            rotate 7
+            rotate 1
             size 20k
             compress
             sharedscripts
             lastaction
-              find /logfiles -iname "*.gz" -printf "%f\n" > logfiles/logfile.log
+              find /logfiles -iname "*.gz" -printf "%f\n" > /logfiles/logfile.log
             endscript
           }
         dest: /etc/logrotate.d/exercise_2
+        
