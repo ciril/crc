@@ -1,0 +1,17 @@
+- hosts: localhost
+  tasks:
+    - name: Configure logrotate
+      copy:
+        content: |
+          /logfiles/* {
+            daily
+            size 20k
+            compress
+            postrotate
+              /usr/bin/find /logfiles -type f -name "*.gz" -exec basename {} \; > /logfiles/log_$(date +\%Y-\%m-\%d)
+            endscript
+          }
+        dest: /etc/logrotate.d/logfiles
+
+    - name: Run logrotate manually
+      command: logrotate /etc/logrotate.d/logfiles --force
