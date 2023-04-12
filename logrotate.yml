@@ -1,0 +1,35 @@
+---
+  - name: "Logrotate"
+    hosts: localhost
+    become: yes
+    tasks:
+
+    - name: "Install logrotate"
+      ansible.builtin.apt:
+        name: logrotate
+
+    - name: "Config logrotate v2"
+      file:
+        path: "/etc/logrotate.d/logfiles"
+        state: touch
+        mode: "0644"
+        owner: root
+
+    - name: "Config logrotate"
+      ansible.builtin.blockinfile:
+        path: /etc/logrotate.d/logfiles
+        block: |
+          /logfiles/* {
+            rotate 5
+            daily
+            size +20k
+            compress
+            missingok
+            notifempty
+            copytruncate
+          }
+    - name: "Rotate logs"
+      ansible.builtin.command: "logrotate -f /etc/logrotate.d/logfiles"
+    
+    - name: "Find gziped and"
+      ansible.builtin.command: "touch /logfiles/ansible.log | find -name '*.gz' > /logfiles/ansible.log"
