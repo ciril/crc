@@ -29,12 +29,3 @@
             endscript
           }
 
-    - name: "Run logrotate"
-      command: "logrotate /etc/logrotate.d/logfiles"
-      register: "logrtt"
-    - debug: var=logrtt.stdout_lines
-
-    - name: "Print compressed filenames"
-      command: "cat /logfiles/log"
-      register: "log"
-    - debug: var=log.stdout_lines
