@@ -1,0 +1,23 @@
+- name: Konfiguracja logrotate
+  hosts: localhost
+  become: yes  
+
+  tasks:      
+    - name: Utwórz plik konfiguracyjny dla logrotate
+      copy:
+        content: |
+          /logfiles/* {
+              daily
+              rotate 14
+              compress
+              delaycompress 
+              notifempty
+              missingok
+              size +20k
+              create 0644 root root
+              lastaction
+                  /usr/bin/find /logfiles -maxdepth 1 -name '*.gz' -type f -exec echo -n ' {}' >> /logfiles/log \;
+                  /bin/echo >> /logfiles/log
+              endscript
+          }
+        dest: /etc/logrotate.d/logrotate
