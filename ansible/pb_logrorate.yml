@@ -1,0 +1,19 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Configure logrotate
+      copy:
+        content: |
+          /logfiles/* {
+            daily
+            rotate 7
+            missingok
+            notifempty
+            size 20k
+            compress
+            lastaction
+              /home/sysadmin/ansible/crc/ansible/save_names.sh
+            endscript
+          }
+        dest: /etc/logrotate.d/logfiles
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
